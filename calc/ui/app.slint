@@ -1,0 +1,36 @@
+import { Button, VerticalBox, HorizontalBox } from "std-widgets.slint";
+import { CalcModel } from "viewmodel/calculator.slint";
+export { CalcModel }
+
+export component AppWindow inherits Window {
+    min-width: 1024px / 2;
+    min-height: 768px / 2;
+    preferred-width: 20rem;
+    preferred-height: 20rem;
+
+    default-font-size: 14px;
+
+    VerticalBox {
+        Text {
+            text: "Counter: \{CalcModel.num}";
+            horizontal-alignment: center;
+            vertical-alignment: center;
+        }
+
+        HorizontalBox {
+            Button {
+                text: "+1";
+                clicked => {
+                    CalcModel.num += 1
+                }
+            }
+
+            Button {
+                text: "-1";
+                clicked => {
+                    CalcModel.num -= 1
+                }
+            }
+        }
+    }
+}
