@@ -8,4 +8,5 @@ edition = "2024"
 [workspace]
 members = [
     "spawn_local",
+    "template",
 ]
