@@ -1,0 +1,59 @@
+import { Button, VerticalBox, HorizontalBox, LineEdit, ListView, CheckBox } from "std-widgets.slint";
+import { TodoModel, TodoItem} from "viewmodel/todo.slint";
+export { TodoModel, TodoItem}
+
+export component AppWindow inherits Window {
+    min-width: 1024px / 2;
+    min-height: 768px / 2;
+    preferred-width: 1024px;
+    preferred-height: 768px;
+
+    default-font-size: 14px;
+
+    VerticalBox {
+        HorizontalBox {
+            padding: 0px;
+            text_edit := LineEdit {
+                placeholder-text: "What needs to be done?";
+                accepted(text) => {
+                    self.text = "";
+                }
+            }
+
+            btn := Button {
+                text: "Add New Entry";
+                enabled: text_edit.text != "";
+                clicked => {
+                    TodoModel.add({ title: text_edit.text, checked: false });
+                    text_edit.text = "";
+                }
+            }
+        }
+
+        todo_list := ListView {
+            for todo in TodoModel.todo_model: HorizontalLayout {
+                CheckBox {
+                    toggled => {
+                        todo.checked = self.checked;
+                    }
+
+                    text: todo.title;
+                    checked: todo.checked;
+                }
+            }
+        }
+
+        HorizontalBox {
+            padding: 0px;
+            alignment: end;
+
+            Button {
+                clicked => {
+                    TodoModel.remove()
+                }
+
+                text: "Remove Done Items";
+            }
+        }
+    }
+}

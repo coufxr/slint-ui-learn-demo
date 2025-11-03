@@ -10,4 +10,5 @@ members = [
     "spawn_local",
     "template",
     "calc",
+    "todo",
 ]

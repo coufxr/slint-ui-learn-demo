@@ -1,0 +1,12 @@
+
+export struct TodoItem {
+    title: string,
+    checked: bool,
+}
+
+export global TodoModel {
+    in-out property <[TodoItem]> todo_model;
+
+    callback add(TodoItem);
+    callback remove();
+}
