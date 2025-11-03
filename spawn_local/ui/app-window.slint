@@ -1,0 +1,20 @@
+import { Button, VerticalBox, TextEdit } from "std-widgets.slint";
+
+export component AppWindow inherits Window {
+    width: 30rem;
+    height: 30rem;
+    in-out property <string> content: "示例文字";
+    callback send();
+    VerticalBox {
+        text := TextEdit {
+            text <=> root.content;
+        }
+
+        Button {
+            text: "seed";
+            clicked => {
+                root.send();
+            }
+        }
+    }
+}
