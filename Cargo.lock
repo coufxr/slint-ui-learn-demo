@@ -4787,6 +4787,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "tab"
+version = "0.1.0"
+dependencies = [
+ "slint",
+ "slint-build",
+]
+
+[[package]]
 name = "table"
 version = "0.1.0"
 dependencies = [
