@@ -1,0 +1,76 @@
+import { Button, ScrollView, ListView } from "std-widgets.slint";
+
+export struct Person {
+    name: string,
+    age: int,
+    job: string,
+}
+
+export component AppWindow inherits Window {
+    height: 20rem;
+    width: 20rem;
+
+    property <[string]> headers: ["姓名", "年龄", "职业"];
+    property <length> cell_width: root.width / headers.length - 8px;
+
+    in-out property <[Person]> data;
+
+    callback add();
+
+    VerticalLayout {
+        // 顶部工具栏
+        HorizontalLayout {
+            Rectangle {
+                horizontal-stretch: 1;
+            }
+
+            Button {
+                text: "add";
+                clicked => {
+                    root.add();
+                }
+            }
+        }
+
+        // 表头
+        HorizontalLayout {
+            for head in headers: Rectangle {
+                border-width: 2px;
+                Text {
+                    width: cell_width;
+                    horizontal-alignment: center;
+                    text: head;
+                    font-weight: 600;
+                }
+            }
+        }
+
+        // 数据区
+        // 使用 ListView+ HorizontalLayout 实现 表格操作
+        // 表格的样式,如分割线暂不知道如何添加
+        ListView {
+            for item in data: HorizontalLayout {
+                spacing: 8px;
+
+                TextInput {
+                    width: cell_width;
+                    text: item.name;
+                    horizontal-alignment: center;
+                    read-only: true;
+                }
+
+                TextInput {
+                    width: cell_width;
+                    text: item.age;
+                    horizontal-alignment: center;
+                }
+
+                TextInput {
+                    width: cell_width;
+                    text: item.job;
+                    horizontal-alignment: center;
+                }
+            }
+        }
+    }
+}
