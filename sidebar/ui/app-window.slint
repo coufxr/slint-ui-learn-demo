@@ -1,0 +1,29 @@
+import { Button, VerticalBox } from "std-widgets.slint";
+import { SideBar } from "bar.slint";
+
+export component AppWindow inherits Window {
+    preferred-width: 400px;
+    preferred-height: 500px;
+    HorizontalLayout {
+        side-bar := SideBar {
+            title: @tr("侧边栏");
+            model: [
+                @tr("Menu" => "红色"),
+                @tr("Menu" => "橙色"),
+                @tr("Menu" => "黄色"),
+                @tr("Menu" => "绿色"),
+                @tr("Menu" => "青色"),
+                @tr("Menu" => "蓝色"),
+                @tr("Menu" => "紫色"),
+            ];
+        }
+
+        if(side-bar.current-item == 0): Rectangle {background: red;}
+        if(side-bar.current-item == 1): Rectangle {background: orange;}
+        if(side-bar.current-item == 2): Rectangle {background: yellow;}
+        if(side-bar.current-item == 3): Rectangle {background: green;}
+        if(side-bar.current-item == 4): Rectangle {background: cyan;}
+        if(side-bar.current-item == 5): Rectangle {background: blue;}
+        if(side-bar.current-item == 6): Rectangle {background: purple;}
+    }
+}
